@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ical-generator": "^4.1.0"
+    "ical-generator": "^4.1.0",
+    "moment": "^2.29.4"
   },
   "type": "module"
 }

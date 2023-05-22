@@ -1,5 +1,6 @@
 import fs from "fs";
 import ical from 'ical-generator';
+import moment from "moment";
 
 const calendar = ical({name: 'jost kalendar'});
 
@@ -17,15 +18,24 @@ function format(line) {
 
     let name = s[0];
 
-    let s2 = s[1].split(",");
+    if (s[1] == undefined) {
+        return;
+    }
 
-    let date = new Date(s[1]);
-    let end = new Date(date.getHours() + 1);
+    let sd = s[1].split(",")
 
-    console.log(date);
+    let d = sd[1] + sd[2];
+
+    let date = moment(d, "DD MMMM YYYY, HH:mm:ss");
+    let end = moment(d, "DD MMMM YYYY, HH:mm:ss");
+    date.add(1, "hour")
+    end.add(2, "hour")
+
+
 
     calendar.createEvent({
-        start: date,
+        start: date.toDate(),
+        end: end.toDate(),
         summary: name,
         description: "Something"
     })
